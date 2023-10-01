@@ -374,20 +374,24 @@ default-template: {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>$title</title>
 <style>
-html, body, p, td, li {background-color: #f9f9f9; font-family: arial, sans-serif, helvetica; font-size: 10pt;}
-h1    {font-size: 16pt; Font-Weight: bold;}
-h2    {font-size: 14pt; color: #2030a0; Font-Weight: bold; width: 100%;
+html, body, p, td, li {background-color: #f9f9f9; font-family: arial, sans-serif, helvetica; font-size: 12pt;}
+header {text-align: center;}
+main  {padding: 20px;}
+footer {text-align: center;}
+h1    {font-size: 18pt; Font-Weight: bold;}
+h2    {font-size: 16pt; color: #2030a0; Font-Weight: bold; width: 100%;
     border-bottom: 1px solid #c09060;}
-h3    {font-size: 12pt; color: #2030a0; Font-Weight: bold;}
-h4    {font-size: 10pt; color: #2030a0; Font-Weight: bold;}
-h5    {font-size: 10pt; Font-Weight: bold;}
+h3    {font-size: 14pt; color: #2030a0; Font-Weight: bold;}
+h4    {font-size: 12pt; color: #2030a0; Font-Weight: bold;}
+h5    {font-size: 12pt; Font-Weight: bold;}
 tt    {font-family: "courier new", monospace, courier; color: darkgreen;}
-pre   {font: bold 10pt "courier new", monospace, console;
+pre   {font: bold 12pt "courier new", monospace, console;
     background-color: #e0e0e0; padding: 16px; border: solid #a0a0a0 1px;}
 table {width: 660px; border-collapse: collapse; border: 0;}
 td    {padding: 4px;}
 img   {border: 0px;}
 
+.container {max-width: 960px; margin: 0 auto; padding: 20px;}
 .toc1 {margin-left: 1cm; font-size: 12pt; font-weight: bold;}
 .toc2 {margin-left: 2cm; font-size: 10pt; Font-Weight: bold; text-decoration: none;}
 .toc3 {margin-left: 3cm; font-size: 10pt; text-decoration: none;}
@@ -410,16 +414,18 @@ tr.height-10 {height: 10px;}
 </style>
 </head>
 <body>
-<table>
-<tr>
-<td><a href="http://www.rebol.com"><img src="http://www.rebol.net/graphics/reb-bare.jpg" alt="REBOL"></a></td>
-</tr>
-<tr class="height-10"><td></td></tr>
-<tr><td>$content</td></tr><tr>
-<tr><td><img src="http://www.rebol.net/graphics/reb-tail.jpg" alt="tail"></td></tr>
-<td class="center">
+<header><a href="http://www.rebol.com"><img src="http://www.rebol.net/graphics/reb-bare.jpg" alt="REBOL"></a>
+</header>
+<div class="container">
+<main>
+$content
+</main>
+</div>
+<footer>
+<img src="http://www.rebol.net/graphics/reb-tail.jpg" alt="tail">
+<br/>
 <span class="tail"><a href="http://www.rebol.com">MakeDoc2 by REBOL</a> - $date</span>
-</td></tr></table>
+</footer>
 </body></html>
 }
 
