@@ -376,7 +376,7 @@ default-template: {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>$title</title>
 <style>
-html, body, p, td, li {background-color: #f9f9f9; font-family: arial, sans-serif, helvetica; font-size: 12pt;}
+html, body, p, td, li {background-color: #f9f9f9; font-family: sans-serif, helvetica, arial; font-size: 12pt; margin: 0}
 header {text-align: center;}
 main  {padding: 20px;}
 footer {text-align: center;}
@@ -404,6 +404,7 @@ img   {border: 0px;}
 .vatop {vertical-align: top;}
 .white {background-color: white}
 .center {text-align: center;}
+.strong {font-weight: bold;}
 
 table.def  {border-spacing: 6px; border-collapse: separate; width: 95%;}
 td.def     {width: 20px;}
@@ -504,7 +505,7 @@ emit-image: func [spec /local tag] [
     ; Emit image. Spec = 'center or default is 'left.
     emit [
         either spec/2 = 'center [<p class="center">][<p>]
-        join {<img src="} [(join image-path spec/1) {">}]
+        join {<img src="} [(join image-path spec/1) {" alt="TODO">}]
         </p>
     ]
 ]
@@ -580,7 +581,7 @@ emit-table: does [
     in-table: true
     in-header: true
     emit {<table class="std-table">
-        <tr class="std-table"><td class="std-table"><b>}
+        <thead><tr class="std-table"><th>}
 ]
 
 emit-table-end: does [
@@ -588,13 +589,16 @@ emit-table-end: does [
     emit "</td></tr></table>"
 ]
 
-emit-table-cell: does [ 
-    emit pick [{</b></td><td class="std-table"><b>} {</td><td class="vatop white">}] in-header
+emit-table-cell: does [
+    emit pick [{</th><th>} {</td><td class="vatop white">}] in-header
 ]
 
 emit-table-row: does [
+    emit pick [
+        {</th></tr></thead><tbody><tr class="std-table"><td class="vatop white">}
+        {</td></tr><tr class="std-table"><td class="vatop white">}
+    ] in-header
     in-header: false
-    emit {</td></tr><tr class="std-table"><td class="vatop white">}
 ]
 
 ;-- Section handling:
@@ -665,9 +669,9 @@ emit-boiler: func [doc /local title info temp] [
     emit [<h1> title </h1>]
     foreach [word val] doc [
         if word = 'code [
-            emit {<blockquote><b>}
+            emit <blockquote class="strong">
             emit-lines val
-            emit {</b></blockquote>}
+            emit </blockquote>
             remove/part find doc 'code 2
             break
         ]
