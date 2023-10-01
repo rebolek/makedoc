@@ -528,16 +528,17 @@ enums: [enum enum2 enum3]
 
 bul-stack: []
 
-push-bul: func [bul /local tags][
-    if any [empty? bul-stack  bul <> last bul-stack][
+push-bul: func [bul][
+    either any [empty? bul-stack  bul <> last bul-stack][
         ;print ['push bul mold bul-stack]
-        tags: either empty? bul-stack [[<ul><ol>]] [[{<li><ul>} {<li><ol>}]]
         append bul-stack bul
-        emit pick tags found? find buls bul
+        emit pick [<ul><ol>] found? find buls bul
+    ] [
+        emit </li>
     ]
 ]
 
-pop-bul: func [bul /local here tags][
+pop-bul: func [bul /local here][
     here: any [find buls bul find enums bul]
     while [
         all [
@@ -551,15 +552,14 @@ pop-bul: func [bul /local here tags][
         ]
     ][
         ;print ['pop bul mold bul-stack]
-        tags: either single? bul-stack [[</ul></ol>]] [[{</ul></li>} {</ol></li>}]]
-        emit pick tags found? find buls last bul-stack
+        emit pick [</ul></ol>] found? find buls last bul-stack
         remove back tail bul-stack
     ]
 ]
 
 emit-item: func [doc item /local tag][
     push-bul item
-    emit [<li> fix-tags doc/2 </li>]
+    emit [<li> fix-tags doc/2]
     pop-bul doc/3
 ]
 
