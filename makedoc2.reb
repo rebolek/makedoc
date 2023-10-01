@@ -47,7 +47,9 @@ REBOL [
 
 ; R2/R3 compatibility layer
 
-set [read-string parse-all] reduce either rebol/version/1 = 2 [[
+set [read-string parse-all] reduce either rebol/version/1 = 2 [
+	single?: func [series] [1 = length? series]
+[
 	func [file] [read file]						; read-string
 	func [data rules] [parse/all data rules]	; parse-all
 ]] [
@@ -423,7 +425,7 @@ $content
 </div>
 <footer>
 <img src="http://www.rebol.net/graphics/reb-tail.jpg" alt="tail">
-<br/>
+<br>
 <span class="tail"><a href="http://www.rebol.com">MakeDoc2 by REBOL</a> - $date</span>
 </footer>
 </body></html>
@@ -512,15 +514,16 @@ enums: [enum enum2 enum3]
 
 bul-stack: []
 
-push-bul: func [bul][
+push-bul: func [bul /local tags][
     if any [empty? bul-stack  bul <> last bul-stack][
         ;print ['push bul mold bul-stack]
+        tags: either empty? bul-stack [[<ul><ol>]] [[{<li><ul>} {<li><ol>}]]
         append bul-stack bul
-        emit pick [<ul><ol>] found? find buls bul
+        emit pick tags found? find buls bul
     ]
 ]
 
-pop-bul: func [bul /local here][
+pop-bul: func [bul /local here tags][
     here: any [find buls bul find enums bul]
     while [
         all [
@@ -534,7 +537,8 @@ pop-bul: func [bul /local here][
         ]
     ][
         ;print ['pop bul mold bul-stack]
-        emit pick [</ul></ol>] found? find buls last bul-stack
+        tags: either single? bul-stack [[</ul></ol>]] [[{</ul></li>} {</ol></li>}]]
+        emit pick tags found? find buls last bul-stack
         remove back tail bul-stack
     ]
 ]
