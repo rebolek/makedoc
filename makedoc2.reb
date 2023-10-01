@@ -45,6 +45,18 @@ REBOL [
     ]
 ]
 
+; R2/R3 compatibility layer
+
+set [read-string parse-all] reduce either rebol/version/1 = 2 [[
+	func [file] [read file]						; read-string
+	func [data rules] [parse/all data rules]	; parse-all
+]] [
+	found?: func [value] [not not value]
+[
+	func [file] [read/string file]				; read-string
+	func [data rules] [parse data rules]		; parse-all
+]]
+
 ; Below you can specify an HTML output template to use for all your docs.
 ; See the default-template example below as a starting suggestion.
 template-file: %template.html  ; Example: %template.html
@@ -203,7 +215,7 @@ set 'scan-doc func [str /options block] [
     ]
     emit options opts
     str: join str "^/^/###" ; makes the parse easier
-    parse detab str rules
+    parse-all detab str rules
     if verbose [
         n: 1
         foreach [word data] out [
@@ -259,7 +271,7 @@ set 'gen-html func [
     ; has 'no-template, then do not use a template.
     if not no-template [
         template: any [select opts 'template select doc 'template template-file]
-        if file? template [template: attempt [read template]]
+        if file? template [template: attempt [read-string template]]
         if not template [template: trim/auto default-template]
     ]
 
@@ -423,7 +435,7 @@ escape-html: func [text][
     foreach [from to] html-codes [replace/all text from to]
     text
 ]
-html-codes: ["&" "&"  "<" "<"  ">" ">"]
+html-codes: ["&" "&amp;"  "<" "&lt;"  ">" "&gt;"]
 
 emit-lines: func [text] [
     ; Emit separate lines in normal font:
@@ -477,7 +489,7 @@ push-bul: func [bul][
     if any [empty? bul-stack  bul <> last bul-stack][
         ;print ['push bul mold bul-stack]
         append bul-stack bul
-        emit pick [<ul><ol>] true? find buls bul
+        emit pick [<ul><ol>] found? find buls bul
     ]
 ]
 
@@ -495,7 +507,7 @@ pop-bul: func [bul /local here][
         ]
     ][
         ;print ['pop bul mold bul-stack]
-        emit pick [</ul></ol>] true? find buls last bul-stack
+        emit pick [</ul></ol>] found? find buls last bul-stack
         remove back tail bul-stack
     ]
 ]
@@ -680,7 +692,7 @@ do-makedoc: has [in-view? file msg doc] [
     save %last-file.tmp file
 
     ; Process the file. Returns [title doc]
-    doc: second gen-html scan-doc read/string file
+    doc: second gen-html scan-doc read-string file
 
     ; Create output file name:
     append clear find/last file #"." ".html"
