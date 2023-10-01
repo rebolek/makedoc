@@ -85,6 +85,7 @@ opts: [] ;[no-toc no-nums]
 out: [] ; The output block (static, reused)
 option: none
 
+
 ;--- Parser rules for the Makedoc text language (top-down):
 
 rules: [some commands]
@@ -247,6 +248,8 @@ root-images: ; Images should be located relative to /
 toc-levels: 2  ; Levels shown in table of contents
 image-path: "" ; Path to images
 
+next-style: none
+
 set 'gen-html func [
     doc [block!]
     /options opts [block!]
@@ -319,8 +322,9 @@ set 'gen-html func [
             table-in    [emit-table doc/2]
             table-out   [emit-table-end]
             table-row   [emit-table-row]
-            center-in   [emit <p class="center">]
-            center-out  [emit </p>]
+;            center-in   [next-style: "center"]
+            center-in   [emit <div style="width: 660px; margin: 0 auto;">]
+            center-out  [emit </div>]
             note-in     [emit-note doc/2]
             note-out    [emit-note-end]
             group-in    [group-count: group-count + 1]
@@ -484,9 +488,18 @@ fix-tags: func [text] [
     text
 ]
 
-emit-para: func [text] [
+emit-para: func [text /local tag] [
     ; Emit standard text paragraph:
-    emit [<p> fix-tags text </p>]
+    tag: copy {<p}
+    ; TODO: NEXT-STYLE is currently unused, it's meant for centering text
+    ;    with CENTER, however, that won't work for other elements
+    ;    so this need some addition work
+    if next-style [
+        repend tag [{ class="} next-style #"^""]
+        next-style: none
+    ]
+    append tag #">"
+    emit [tag fix-tags text </p>]
 ]
 
 emit-code: func [doc] [
