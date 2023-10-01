@@ -455,7 +455,7 @@ escape-html: func [text][
     foreach [from to] html-codes [replace/all text from to]
     text
 ]
-html-codes: ["&" "&"  "<" "<"  ">" ">"]
+html-codes: ["&" "&amp;"  "<" "&lt;"  ">" "&gt;"]
 
 emit-lines: func [text] [
     ; Emit separate lines in normal font:
