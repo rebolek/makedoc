@@ -5,7 +5,7 @@ REBOL [
         "REBOL Technologies 1999-2005"
         "Boleslav Březovský 2023"
     ]
-    Author: ["Carl Sassenrath" "Boleslav Březovský"
+    Author: ["Carl Sassenrath" "Boleslav Březovský"]
     File: %makedoc2.r
     Date: 02-10-2023
     Purpose: {
@@ -391,7 +391,9 @@ h5    {font-size: 12pt; Font-Weight: bold;}
 tt    {font-family: "courier new", monospace, courier; color: darkgreen;}
 pre   {font: bold 12pt "courier new", monospace, console;
     background-color: #e0e0e0; padding: 16px; border: solid #a0a0a0 1px;}
-table {width: 660px; border-collapse: collapse; border: 0;}
+table {width: 660px; border-collapse: separate; border-spacing: 1px; border: 0;}
+tr    {background-color: silver;}
+td    {padding: 4px;}
 td    {padding: 4px;}
 img   {border: 0px;}
 
@@ -411,9 +413,6 @@ img   {border: 0px;}
 table.def  {border-spacing: 6px; border-collapse: separate; width: 95%;}
 td.def     {width: 20px;}
 td.def2    {width: 80px;}
-table.std-table {border-collapse: separate; border-spacing: 1px;}
-tr.std-table {background-color: silver;}
-td.std-table {padding: 4px;}
 tr.height-10 {height: 10px;}
 
 </style>
@@ -591,8 +590,8 @@ in-table: in-header: false
 emit-table: does [
     in-table: true
     in-header: true
-    emit {<table class="std-table">
-        <thead><tr class="std-table"><th>}
+    emit {<table>
+        <thead><tr><th>}
 ]
 
 emit-table-end: does [
@@ -606,8 +605,8 @@ emit-table-cell: does [
 
 emit-table-row: does [
     emit pick [
-        {</th></tr></thead><tbody><tr class="std-table"><td class="vatop white">}
-        {</td></tr><tr class="std-table"><td class="vatop white">}
+        {</th></tr></thead><tbody><tr><td class="vatop white">}
+        {</td></tr><tr><td class="vatop white">}
     ] in-header
     in-header: false
 ]
