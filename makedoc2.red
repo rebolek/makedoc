@@ -65,13 +65,16 @@ detab: func [
 trim-auto: func [series /local indent mark] [
     parse series [
         mark: copy indent any space :mark
+        remove indent thru newline
         any [
             thru newline
             remove indent
             to newline
         ]
-        remove indent
-        to end
+        opt [
+            remove indent
+            to end
+        ]
     ]
     series
 ]
