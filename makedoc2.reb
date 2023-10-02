@@ -1,10 +1,13 @@
 REBOL [
     Title: "MakeDoc 2 - The REBOL Standard Document Formatter"
-    Version: 2.5.7
-    Copyright: "REBOL Technologies 1999-2005"
-    Author: "Carl Sassenrath"
+    Version: 2.6.0
+    Copyright: [
+        "REBOL Technologies 1999-2005"
+        "Boleslav Březovský 2023"
+    ]
+    Author: ["Carl Sassenrath" "Boleslav Březovský"
     File: %makedoc2.r
-    Date: 10-Mar-2007 ;10-Jan-2005
+    Date: 02-10-2023
     Purpose: {
         This is the official MakeDoc document formatter that is used by
         REBOL Technologies for all documentation. It is the fastest and
@@ -33,16 +36,7 @@ REBOL [
             set [title out] gen-html/options doc [(options)]
             write %out.html out
     }
-    Library: [
-        level: 'intermediate
-        platform: 'all
-        type: [tool]
-        domain: [html cgi markup]
-        tested-under: none
-        support: none
-        license: 'BSD
-        see-also: none
-    ]
+    License: 'BSD
 ]
 
 ; R2/R3 compatibility layer
