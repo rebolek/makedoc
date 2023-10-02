@@ -47,17 +47,21 @@ REBOL [
 
 ; R2/R3 compatibility layer
 
-set [read-string parse-all] reduce either rebol/version/1 = 2 [
-	single?: func [series] [1 = length? series]
-[
-	func [file] [read file]						; read-string
-	func [data rules] [parse/all data rules]	; parse-all
-]] [
-	found?: func [value] [not not value]
-[
-	func [file] [read/string file]				; read-string
-	func [data rules] [parse data rules]		; parse-all
-]]
+if rebol [ ; NOTE: This can be called from Red also
+    set [read-string parse-all] reduce either rebol/version/1 = 2 [
+        single?: func [series] [1 = length? series]
+    [
+        func [file] [read file]                     ; read-string
+        func [data rules] [parse/all data rules]    ; parse-all
+    ]] [
+        found?: func [value] [not not value]
+    [
+        func [file] [read/string file]              ; read-string
+        func [data rules] [parse data rules]        ; parse-all
+    ]]
+    ; NOTE: This is for compatibility with Red
+    trim-auto: func [value] [trim/auto value]
+]
 
 ; Below you can specify an HTML output template to use for all your docs.
 ; See the default-template example below as a starting suggestion.
@@ -139,7 +143,7 @@ commands: [
     ;-- Extended commands (all begin with "="):
     | #";" text-block ; comments and hidden paragraphs
     | #"=" [
-          #"=" output (emit output trim/auto code)
+          #"=" output (emit output trim-auto code)
         | "image" image
         | "row" (emit table-row none)
         | "column" (emit column none) ; (for doc, not tables)
@@ -163,7 +167,7 @@ commands: [
     ]
 
     ;-- Primary implied paragraph types:
-    | example (emit code trim/auto detab code)
+    | example (emit code trim-auto detab code)
     | paragraph (
         either title [emit para para][emit title title: para]
     )
@@ -267,7 +271,7 @@ set 'gen-html func [
     old-tags:
     root-images:
         none
-	lang: "en"
+    lang: "en"
 
     set-options opts: any [opts []]
     set-options select doc 'options
@@ -279,7 +283,7 @@ set 'gen-html func [
     if not no-template [
         template: any [select opts 'template select doc 'template template-file]
         if file? template [template: attempt [read-string template]]
-        if not template [template: trim/auto default-template]
+        if not template [template: trim-auto default-template]
     ]
 
     ; Emit title and boilerplate:
@@ -342,7 +346,7 @@ set 'gen-html func [
     if template [
         ; Template variables all begin with $
         tmp: copy template ; in case it gets reused
-		replace tmp "$lang" lang
+        replace tmp "$lang" lang
         replace/all tmp "$title" title
         replace/all tmp "$date" now/date
         replace tmp "$content" out
