@@ -1,0 +1,219 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<title>MakeDoc Example</title>
+<style type="text/css">
+html, body, p, td, li {font-family: arial, sans-serif, helvetica; font-size: 10pt;}
+h1 {font-size: 14pt; Font-Weight: bold;}
+h2 {font-size: 12pt; color: #2030a0; Font-Weight: bold; width: 100%;
+	border-bottom: 1px solid #c09060;}
+h3 {font-size: 10pt; color: #2030a0; Font-Weight: bold;}
+h4 {font-size: 10pt; color: #2030a0; Font-Weight: bold;}
+h5 {font-size: 10pt; Font-Weight: bold;}
+tt {font-family: monospace, courier; font-size: 10pt; color: #006000;}
+pre {font: bold 10pt "courier new", monospace, console;
+	background-color: #e0e0e0; padding: 16px; border: solid #a0a0a0 1px;}
+li {margin-bottom: 10px}
+.toc1 {margin-left: 1cm; font-size: 12pt; font-weight: bold;}
+.toc2 {margin-left: 2cm; font-size: 10pt; font-weight: bold;}
+.toc3 {margin-left: 3cm; font-size: 10pt;}
+.toc4 {margin-left: 4cm; font-size: 10pt; color: #606060;}
+.output {color: #000060; font-weight: normal;}
+.note {background-color: #f0e090; width: 100%; padding: 16px; border: solid #a0a0a0 1px;}
+.tail {color: gray; font-size: 8pt;}
+.title {Font-Size: 16pt; Font-Weight: bold;}
+.fset {background-color: #fff8e0;}
+legend {Color: #600000; Font-Weight: bold;}
+</style>
+</head>
+
+<body bgcolor="white">
+
+<center>
+
+<table width="660" cellpadding="4" cellspacing="0" border="0">
+
+<tr>
+<td><a href="http://www.rebol.net"><img src="http://www.rebol.com/graphics/reb-bare.jpg" border=0 alt="REBOL.net"></a></td>
+</tr>
+
+<tr height="10"><td></td></tr>
+
+<tr><td><p><h1>MakeDoc Example</h1>
+<blockquote><b>
+Boilerplate goes here.<br>Follows directly after title.
+</b></blockquote>
+<h2 id="section-1">Heading 1</h2>
+<p>This is a paragraph. You can have any text here.</p>
+<p>This is the next paragraph. Notice that everything is separated
+by a blank line. That's the main thing you need to remember.</p>
+<p>If you want bold words use the <b>bold markers</b> like that.
+You can also use <i>italic</i> and <u>underline</u>.</p>
+<h3 id="section-1.1">Heading 1.1</h3>
+<h4 id="section-1.1.1">Heading 1.1.1</h4>
+<h5 id="section-1.1.1.1">Heading 1.1.1.1 (with space check)</h5>
+<h3 id="section-1.2">Heading 1.2</h3>
+<h2 id="section-2">Code Sections</h2>
+<p>Code follows:</p>
+<pre>
+Code example
+
+Can be more than one line.
+
+Always indented and marked.
+
+    And indentation is preserved.
+</pre>
+<p>Code output:</p>
+<pre>
+<span class="output">Code output</span>
+</pre>
+<p>Both:</p>
+<pre>
+Code
+<span class="output">Output</span>
+</pre>
+<h2 id="section-3">Bullets</h2>
+<ul>
+<li>Bullet 1</li>
+<li>Bullet 2 - Has sub-bullets</li>
+<ul>
+<li>Bullet 2.1</li>
+<li>Bullet 2.2</li>
+<ul>
+<li>Bullet 2.2.1</li>
+</ul>
+</ul>
+<li>Bullet 3 - Has enums</li>
+<ol>
+<li>Enum 1 in bullet</li>
+<li>Enum 2 in bullet</li>
+<ol>
+<li>Enum 2.1 in bullet</li>
+<li>Enum 2.2 in bullet</li>
+</ol>
+</ol>
+<li>Bullet 4</li>
+</ul>
+<h2 id="section-4">Enums</h2>
+<ol>
+<li>Enum 1</li>
+<li>Enum 2</li>
+<ol>
+<li>Enum 2.1</li>
+<li>Enum 2.2</li>
+<ol>
+<li>Enum 2.2.1</li>
+</ol>
+</ol>
+<li>Enum 3</li>
+<ul>
+<li>Bullet 1 in enum</li>
+<li>Bullet 2 in enum</li>
+<ul>
+<li>Bullet 2.1 in enum</li>
+<li>Bullet 2.2 in enum</li>
+</ul>
+</ul>
+<li>Enum 4</li>
+</ol>
+<h2 id="section-5">Definitions</h2>
+<table cellspacing="6" border="0" width="95%">
+<tr><td width="20">&nbsp;</td><td valign="top" width="80"><b>word1</b></td><td valign="top">word 1 defined
+</td></tr>
+<tr><td width="20">&nbsp;</td><td valign="top" width="80"><b>word2</b></td><td valign="top">word 2 defined
+</td></tr>
+<tr><td width="20">&nbsp;</td><td valign="top" width="80"><b>word3</b></td><td valign="top">word 3 defined
+</td></tr>
+</table>
+<h2 id="section-6">Hidden Comments</h2>
+<p>There should not be another text line below this one.</p>
+<h2 id="section-7">Image</h2>
+<p align="center"><img src="/graphics/reb-logo.gif"></p>
+<h2 id="section-8">Special</h2>
+<p><fieldset class="fset"><legend>This is a note</legend>
+<p>Note here</p>
+</fieldset>
+<p>This next line is indented:</p>
+<blockquote>
+<p>Indented line</p>
+</blockquote>
+<center>
+<p>This is centered text.</p>
+</center>
+<h2 id="section-9">Table</h2>
+<table border="0" cellspacing="1" cellpadding="4" bgcolor="#505050">
+		<tr bgcolor="silver"><td><b>
+<p>Column 1</p>
+</b></td><td><b>
+<p>Column 2</p>
+</b></td><td><b>
+<p>Column 3</p>
+</td></tr><tr><td valign="top" bgcolor="white">
+<p>Row 1, col 1</p>
+</td><td valign="top" bgcolor="white">
+<p>Row 1, col 2</p>
+</td><td valign="top" bgcolor="white">
+<p>Row 1, col 3</p>
+</td></tr><tr><td valign="top" bgcolor="white">
+<p>Row 2, col 1</p>
+</td><td valign="top" bgcolor="white">
+<p>Row 2, col 2</p>
+</td><td valign="top" bgcolor="white">
+<p>Row 2, col 3</p>
+</td></tr></table>
+<center>
+<p>Centered Table</p>
+<table border="0" cellspacing="1" cellpadding="4" bgcolor="#505050">
+		<tr bgcolor="silver"><td><b>
+<p>Column 1</p>
+</b></td><td><b>
+<p>Column 2</p>
+</td></tr><tr><td valign="top" bgcolor="white">
+<p>Paragraphs in table</p>
+</td><td valign="top" bgcolor="white">
+<p><b>This is the first paragraph.</b></p>
+<p>This is the second.</p>
+<p>Here is the third.</p>
+</td></tr><tr><td valign="top" bgcolor="white">
+<p>Bullets in table</p>
+</td><td valign="top" bgcolor="white">
+<ul>
+<li>Bullet 1</li>
+<li>Bullet 2</li>
+<li>Bullet 3</li>
+</ul>
+</td></tr><tr><td valign="top" bgcolor="white">
+<p>Code in table</p>
+</td><td valign="top" bgcolor="white">
+<pre>
+Line of code
+
+Another line of code
+</pre>
+</td></tr></table>
+</center>
+<h2 id="section-10">Document End Marker</h2>
+<p>Everything that follows this marker is hidden.
+Good for keeping notes, change logs, etc.</p>
+</blockquote>
+<p></td></tr>
+
+<tr><td><img src="http://www.rebol.com/graphics/reb-tail.jpg" border=0></td></tr>
+
+<tr>
+<td><p align=center><font color="#808080" size=1>
+Updated 14-Mar-2007, WIP Wiki, REBOL/Core 2.6.2.4.2
+&nbsp; - &nbsp;
+Copyright 2007 REBOL Technologies
+&nbsp; - &nbsp;
+<a href="http://www.rebol.com"><font color="#808080" size=1>WWW.REBOL.COM</font></a>
+&nbsp; - &nbsp;
+<A HREF=/cgi-bin/wip.r?r=edit+%25web/docs/makedoc/example.rmd&>Edit</A>
+</font></p></td>
+</tr>
+
+</table>
+</center>
+</body>
+</html>
