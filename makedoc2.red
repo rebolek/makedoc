@@ -33,7 +33,7 @@ detab: func [
 trim-auto: func [series /local indent mark] [
     parse series [
         mark: copy indent any space :mark
-        remove indent thru newline
+        remove indent to newline
         any [
             thru newline
             remove indent
