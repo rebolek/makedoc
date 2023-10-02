@@ -2,5 +2,7 @@
 MakeDoc fixed for Rebol3 and Red
 
 # Links
-[http://rebol.net/docs/makedoc/](Rebol MakeDoc page)
-[https://en.wikipedia.org/wiki/MakeDoc](Wikipedia MakeDoc page)
+* [The Rebol MakeDoc Page](http://www.rebol.net/docs/makedoc.html)
+* [The MakeDoc Standardization Project](http://rebol.net/docs/makedoc/)
+* [Last Carl's version](http://www.rebol.org/view-script.r?script=makedoc2.r)
+* [Wikipedia MakeDoc page](https://en.wikipedia.org/wiki/MakeDoc)
