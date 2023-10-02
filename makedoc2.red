@@ -1,48 +1,16 @@
 Red [
-    Title: "MakeDoc 2 - The REBOL Standard Document Formatter"
-    Version: 2.5.7
-    Copyright: "REBOL Technologies 1999-2005"
-    Author: "Carl Sassenrath"
-    File: %makedoc2.r
-    Date: 10-Mar-2007 ;10-Jan-2005
+    Title: "MakeDoc Red wrapper"
+    Version: 0.1.0
+    Copyright: "Boleslav Březovský 2023"
+    Author: "Boleslav Březovský"
+    File: %makedoc2.red
+    Date: 02-10-2023
     Purpose: {
-        This is the official MakeDoc document formatter that is used by
-        REBOL Technologies for all documentation. It is the fastest and
-        easiest way to create good looking documentation using any text
-        editor (even ones that do not auto-wrap text). It creates titles,
-        headings, contents, bullets, numbered lists, indented examples,
-        note blocks, and more. For documentation, notes, and other info
-        visit http://www.rebol.net/docs/makedoc.html
+        This is wrapper over Rebol version of MakeDoc2 script.
+        It's a compatibility layer to make that version work in Red
+        so there's no need to have two codebases.
     }
-    Usage: {
-        Create a text document in any editor. Separate each paragraph
-        with a blank line. Run this script and provide your text file.
-        The output file will be the same name with .html following it.
-        If you use REBOL/View the output file will be displayed in
-        your web browser as well.
-
-        You can also call this script from other scripts (e.g. CGI).
-        These are supported:
-
-            do %makedoc2.r
-
-            do/args %makedoc2.r %document.txt
-
-            do/args %makedoc2.r 'load-only
-            doc: scan-doc read %file.txt
-            set [title out] gen-html/options doc [(options)]
-            write %out.html out
-    }
-    Library: [
-        level: 'intermediate
-        platform: 'all
-        type: [tool]
-        domain: [html cgi markup]
-        tested-under: none
-        support: none
-        license: 'BSD
-        see-also: none
-    ]
+    License: 'BSD
 ]
 
 found?: func [value] [not not value]
