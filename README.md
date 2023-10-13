@@ -8,4 +8,4 @@ MakeDoc fixed for Rebol3 and Red
 * [Wikipedia MakeDoc page](https://en.wikipedia.org/wiki/MakeDoc)
 * [Gabrielle's MakeDoc3](http://colellachiara.com/soft/MD3/md3.html)
 * [Robert Muench's MakeDocPro](https://www.robertmuench.de/development/projects/mdp/)
-* [Chris Ross-Gill's MakeDoc variant](https://www.robertmuench.de/development/projects/mdp/)
+* [Chris Ross-Gill's MakeDoc variant](https://github.com/rgchris/Scripts/tree/master)
