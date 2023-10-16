@@ -91,7 +91,7 @@ lest: context [
     |   match-tag
     ]
 
-    tags: ['div | 'span]
+    tags: ['div | 'span | 'p]
 
     match-tag: [
         ; TODO: either add list of foridden tags
@@ -134,7 +134,7 @@ lest: context [
 
     define-template: [
         set tag set-word!
-        set value block!
+        set value skip
         (put templates tag value)
         (repend templ-tags ['| to lit-word! tag])
     ]
