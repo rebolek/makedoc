@@ -52,11 +52,12 @@ lest: context [
 ;-- matching rules
 
     expand-template: [
-        mark:
-        change set tag templ-tags (
-            select templates tag
-        )
-        :mark
+        ahead [
+            change set tag templ-tags (
+                debug ["template/EXP:" tag]
+                select templates tag
+            )
+        ]
     ]
 
     match-atts: [
@@ -141,21 +142,42 @@ lest: context [
 ;-- main rule
 
     rules: [
-        mark: (probe mark)
+    ;   mark: (probe mark)
         define-template
     |   match-cmds
+        ; NOTE: without next rule, rule fails in Red
+        [end | rules]
+    ]
+
+;-- support funcs
+
+    make-templ-tags: func [] [
+        clear templ-tags
+        foreach value words-of templates [
+            repend templ-tags [to lit-word! value '|]
+        ]
+        take/last templ-tags
     ]
 
 ;-- main func
 
-    generate: func [data] [
+    generate: func [
+        data
+        /templ
+            templ-data
+    ] [
         clear output
         clear tag-stack
         clear templates
         clear templ-tags
         append templ-tags quote '-- ; NOTE: Fake rule to simplify rule adding
 
-        parse data [some rules]
+        if templ-data [
+            templates: templ-data
+            make-templ-tags
+        ]
+
+        probe parse data [some rules]
 
         copy output
     ]
